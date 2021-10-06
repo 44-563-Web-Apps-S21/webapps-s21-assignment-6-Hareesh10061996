@@ -9,38 +9,78 @@
 <h2>Pass phrase by Hareesh Kondaveeti</h2>
 
 <form>
-    <label for="secret_word">Enter the secret phrase </label>
-    <input type ="password" id="secret_word" name="secret_word" value="Let me in"> <br>
-
-    <label for="guess"> Enter a phrase </label>
-    <input type ="text" id="guess" name="guess" autofocus> <br>
-
-    <input type="button" onclick="processPhrase()" value="Check the phrase">
-</form>
-
-
-<p id="result">Result will be displayed </p>
-
-<script> 
-    var correct = 0;
-    var wrogn = 0;
-         
-    function processPhrase(){
-    secret = document.getElementById("secret_word").value
-    guess = document.getElementById("guess").value    
-    out = document.getElementById("result")
-    if(secret == guess)
-    {
-        correct++
-        alert("Access Allowed")
-    } 
-    else {
-        wrogn++
-        alert("Access Denied")
-    }
-    out.innerHTML = "correct count" + correct + "wrong count:" +wrong  
-}
-</script>
-
-</body>
-</html>
+    <div class="form-group">
+        <label for="form1_secretPhrase">Enter the secret phrase</label>
+        <input type ="password" id = "form1_secretPhrase" name = "form1_secretPhrase" min = 10 max = 50 step = 2 value = "Let me in"> <br>
+    </div>
+    <div class="form-group">
+        <label for="form1_phraseCheck">Enter a phrase</label>
+        <input type = "text" id = "form1_checkPhrase" name = "form1_checkPhrase" autofocus> <br>
+    </div>
+        <input type = "button" class="btn btn-primary" onclick = "processPhrase()" value = "Check the phrase">
+    </form>
+    
+    
+    <p id = "result">Result will be displayed</p>
+    
+    <div class="container">
+        <img src="Aardvark.jpg" id="image" class="img-fluid" alt="Aardvark" height="200" width="200" onclick=newImage()>
+    </div>
+    <script> 
+        let currentImage = 1;
+        var correct = 0;
+        var wrong = 0;
+        let counterWrong= 0;
+        
+        function processPhrase()
+        { 
+            if (counterWrong == 3)
+            {
+                lockAccount();
+            }
+            else
+            {
+            console.log("Getting form values")
+            secretPhrase = document.getElementById("form1_secretPhrase").value
+            checkPhrase = document.getElementById("form1_checkPhrase").value 
+            out = document.getElementById("result")
+            if(secretPhrase == checkPhrase)
+            { 
+                correct++; 
+                counterWrong= 0;
+                alert("Access allowed");
+                document.getElementById("result").innerHTML = "The value of correct is: " + correct;
+            } 
+            else 
+            {
+                counterWrong++;
+                wrong++;
+                alert("Access denied");
+                document.getElementById("result").innerHTML = "The value of wrong is: " + wrong;
+            }
+            }
+        }
+        function lockAccount()
+        {
+            alert("account locked");
+        }
+        function newImage(img) 
+        {
+                switch (currentImage)
+                {
+                    case 1:
+                        document.getElementById("image").src ="Aardvark.jpg";
+                        currentImage++;
+                        break;
+                    case 2: document.getElementById("image").src ="goats-2.jpg";
+                        currentImage++;
+                        break;
+                    case 3: document.getElementById("image").src ="kangaro.jpg";
+                        currentImage = 1;
+                        break;
+                    default: currentImage = 1;
+                }
+        }
+        </script>  
+    </body>
+    </html> 
