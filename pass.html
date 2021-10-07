@@ -1,86 +1,93 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Checking the phrase</title>
-</head>
+ <head>
+    <title>Pass Page</title>
+    <meta charset = "utf-8">
+  <meta name = "viewport" content = "width=device-width, initial-scale = 1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+ </head>
 <body>
 
-<h2>Pass phrase by Hareesh Kondaveeti</h2>
-
+<h2>Pass phrase by Hareesh kondaveeti</h2>
 <form>
-    <div class="form-group">
-        <label for="form1_secret">Enter the secret phrase</label>
-        <input type ="password" id = "form1_secret" name = "form1_secret" min = 10 max = 50 step = 2 value = "Let me in"> <br>
-    </div>
-    <div class="form-group">
-        <label for="form1_Check">Enter a phrase</label>
-        <input type = "text" id = "form1_check" name = "form1_check" autofocus> <br>
-    </div>
-        <input type = "button" class="btn btn-primary" onclick = "processPhrase()" value = "Check ">
-    </form>
+<div class="form-group">
+    <label for="form1_secretPhrase">Enter the secret phrase</label>
+    <input type ="password" id = "form1_secretPhrase" name = "form1_secretPhrase" min = 10 max = 50 step = 2 value = "Let me in"> <br>
+</div>
+<div class="form-group">
+    <label for="form1_phraseCheck">Enter a phrase</label>
+    <input type = "text" id = "form1_checkPhrase" name = "form1_checkPhrase" autofocus> <br>
+</div>
+    <input type = "button" class="btn btn-primary" onclick = "processPhrase()" value = "Check the phrase">
+</form>
+
+
+<p id = "result">Result will be displayed</p>
+
+<div class="container">
+    <img src="Aardvark.jpg" id="image" class="img-fluid" alt="Aardvark" height="200" width="200" onclick=newImage()>
+</div>
+<script> 
+    let currentImage = 1;
+    var correct = 0;
+    var wrong = 0;
+    let counterWrong= 0;
     
-    
-    <p id = "result">Result will be shown here</p>
-    
-    <div class="container">
-        <img src="Aardvark.jpg" id="image" class="img-fluid" alt="Aardvark" height="200" width="200" onclick=newImage()>
-    </div>
-    <script> 
-        let currentImage = 1;
-        var correct = 0;
-        var wrong = 0;
-        let counterWrong= 0;
-        
-        function process()
+    function processPhrase()
+    { 
+        if (counterWrong == 3)
+        {
+            lockAccount();
+        }
+        else
+        {
+        console.log("Getting form values")
+        secretPhrase = document.getElementById("form1_secretPhrase").value
+        checkPhrase = document.getElementById("form1_checkPhrase").value 
+        out = document.getElementById("result")
+        if(secretPhrase == checkPhrase)
         { 
-            if (counterWrong == 3)
-            {
-                lockAccount();
-            }
-            else
-            {
-            console.log("Getting form values")
-            secretPhrase = document.getElementById("form1_secret").value
-            checkPhrase = document.getElementById("form1_check").value 
-            out = document.getElementById("result")
-            if(secretPhrase == check)
-            { 
-                correct++; 
-                counterWrong= 0;
-                alert("Access allowed");
-                document.getElementById("result").innerHTML = "The value of correct is: " + correct;
-            } 
-            else 
-            {
-                counterWrong++;
-                wrong++;
-                alert("Access denied");
-                document.getElementById("result").innerHTML = "The value of wrong is: " + wrong;
-            }
-            }
-        }
-        function lockAccount()
+            correct++; 
+            counterWrong= 0;
+            alert("Access allowed");
+            document.getElementById("result").innerHTML = "The value of correct is: " + correct;
+        } 
+        else 
         {
-            alert("account locked");
+            counterWrong++;
+            wrong++;
+            alert("Access denied");
+            document.getElementById("result").innerHTML = "The value of wrong is: " + wrong;
         }
-        function newImage(img) 
-        {
-                switch (currentImage)
-                {
-                    case 1:
-                        document.getElementById("image").src ="Aardvark.jpg";
-                        currentImage++;
-                        break;
-                    case 2: document.getElementById("image").src ="goats-2.jpg";
-                        currentImage++;
-                        break;
-                    case 3: document.getElementById("image").src ="kangaro.jpg";
-                        currentImage = 1;
-                        break;
-                    default: currentImage = 1;
-                }
         }
-        </script>  
-    </body>
-    </html> 
+    }
+    function lockAccount()
+    {
+        alert("account locked");
+    }
+    function newImage(img) 
+    {
+            switch (currentImage)
+            {
+                case 1:
+                    document.getElementById("image").src ="Aardvark.jpg";
+                    currentImage++;
+                    break;
+                case 2: document.getElementById("image").src ="goats-2.jpg";
+                    currentImage++;
+                    break;
+                case 3: document.getElementById("image").src ="kangaro.jpg";
+                    currentImage = 1;
+                    break;
+                default: currentImage = 1;
+            }
+    }
+    </script>  
+</body>
+</html> 
